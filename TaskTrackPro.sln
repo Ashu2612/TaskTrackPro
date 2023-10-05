@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrackPro", "TaskTrackPro.csproj", "{86A1F93B-9E32-4928-B8F0-B41BAF2666CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86A1F93B-9E32-4928-B8F0-B41BAF2666CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86A1F93B-9E32-4928-B8F0-B41BAF2666CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86A1F93B-9E32-4928-B8F0-B41BAF2666CA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{86A1F93B-9E32-4928-B8F0-B41BAF2666CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86A1F93B-9E32-4928-B8F0-B41BAF2666CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86A1F93B-9E32-4928-B8F0-B41BAF2666CA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B272E87-25DD-42AA-951C-AFE6BC3D7435}
+	EndGlobalSection
+EndGlobal
