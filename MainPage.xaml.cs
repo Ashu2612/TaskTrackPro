@@ -1,24 +1,53 @@
-﻿namespace TaskTrackPro
+﻿using Microsoft.Identity.Client;
+using Microsoft.Identity.Client.Extensibility;
+using System.Security.Claims;
+
+namespace TaskTrackPro
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void LoginBtn_Clicked(object sender, EventArgs e)
         {
-            count++;
+            string clientId = "087c68d2-fc42-4758-9ab5-53a9cf8d076f";
+            string redirectUri = "TaskTrackerPro://Oauth";
+            string[] scopes = { "openid", "profile" }; // Add the required scopes
+            TimeSpan tokenExpiration = TimeSpan.FromHours(1);
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            var app = PublicClientApplicationBuilder
+                .Create(clientId)
+                .WithRedirectUri(redirectUri)
+                .Build();
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            try
+            {
+                var authResult = await app.AcquireTokenInteractive(scopes)
+                    .ExecuteAsync();
+            
+                if (authResult.AccessToken != null)
+                {
+                    var dashbord = new Dashbord();
+                    _ = Navigation.PushAsync(dashbord);
+                }
+                else
+                {
+                    await DisplayAlert("Unable to authenticate the user.", "Check your email id and try again !", "Okay");
+                }
+            }
+            catch (MsalException ex)
+            {
+                await DisplayAlert("Authentication Exception !", ex.Message, "Okay");
+            }
+        }
+
+        private void LoginBtn_Clicked_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

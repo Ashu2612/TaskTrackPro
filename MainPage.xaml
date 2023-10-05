@@ -1,41 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TaskTrackPro.MainPage">
+             x:Class="TaskTrackPro.MainPage" BackgroundImageSource="nature_background.jpg" >
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <Grid VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="520" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+        <BoxView Grid.Row="1" Grid.Column="1" Color="White" Opacity="0.9" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <BoxView.Shadow>
+                <Shadow></Shadow>
+            </BoxView.Shadow>
+        </BoxView>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="460" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="650"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="timesheet_image.jpg" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Aspect="AspectFit" Opacity="0.2"></Image>
+            <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="20" Color="White" Opacity="0.7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <BoxView.Shadow>
+                    <Shadow Opacity="0.1"></Shadow>
+                </BoxView.Shadow>
+            </BoxView>
+            <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="20" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="160" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="1" Text="TaskTracker Pro" FontSize="Large" HorizontalOptions="Center"></Label>
+                <Label Grid.Row="3" Text="Sign in" HorizontalOptions="Center"></Label>
+                <Button Grid.Row="6" HeightRequest="15" Text="Sign in with Microsoft account" WidthRequest="300" x:Name="LoginBtn" Clicked="LoginBtn_Clicked" BackgroundColor="#4caef5">
+                    <Button.Shadow>
+                        <Shadow Brush="#b9c3c9"></Shadow>
+                    </Button.Shadow>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
 
 </ContentPage>
