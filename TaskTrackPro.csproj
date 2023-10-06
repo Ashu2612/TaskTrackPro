@@ -32,7 +32,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\tasktrack_logo.ico"/>
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -56,6 +56,7 @@
 	  <None Remove="Resources\Images\desk_background.jpg" />
 	  <None Remove="Resources\Images\logo_caliber_horizontal.png" />
 	  <None Remove="Resources\Images\nature_background.jpg" />
+	  <None Remove="Resources\Images\tasktrack_logo.png" />
 	  <None Remove="Resources\Images\timesheet_image.jpg" />
 	  <None Remove="Resources\Raw\appSetting.json" />
 	</ItemGroup>

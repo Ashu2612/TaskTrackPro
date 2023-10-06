@@ -9,6 +9,10 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="WindowCaptionBackground">Green</SolidColorBrush>
+            <SolidColorBrush x:Key="WindowCaptionBackgroundDisabled">LightGreen</SolidColorBrush>
+            <SolidColorBrush x:Key="WindowCaptionForeground">Red</SolidColorBrush>
+            <SolidColorBrush x:Key="WindowCaptionForegroundDisabled">Pink</SolidColorBrush>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
