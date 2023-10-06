@@ -6,7 +6,7 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity Name="maui-package-name-placeholder" Publisher="CN=User Name" Version="0.0.0.0" />
+  <Identity Name="maui-package-name-placeholder" Publisher="CN=User Name" Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="6597BC4C-7CAA-4381-BBB5-87A675D6A42F" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -35,6 +35,8 @@
         BackgroundColor="transparent">
         <uap:DefaultTile Square71x71Logo="$placeholder$.png" Wide310x150Logo="$placeholder$.png" Square310x310Logo="$placeholder$.png" />
         <uap:SplashScreen Image="$placeholder$.png" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
       </uap:VisualElements>
     </Application>
   </Applications>

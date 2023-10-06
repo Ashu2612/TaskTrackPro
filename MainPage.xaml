@@ -20,15 +20,15 @@
             </BoxView.Shadow>
         </BoxView>
 
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="460" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="650"/>
                 <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="450"/>
             </Grid.ColumnDefinitions>
 
             <Image Source="logo_caliber_horizontal.png" Grid.Row="1" Grid.Column="0" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center"></Image>

@@ -22,6 +22,7 @@ namespace TaskTrackPro
                 System.Drawing.Rectangle workingRectangle =
                 Screen.PrimaryScreen.WorkingArea;
                 appWindow.Resize(new SizeInt32(1080, 640));
+
                 // appWindow.MoveAndResize(new Windows.Graphics.RectInt32((Screen.PrimaryScreen.Bounds.Width / 8), (Screen.PrimaryScreen.Bounds.Height / 8), (workingRectangle.Width - (int)((workingRectangle.Width / 100) * 20)), (workingRectangle.Height - (int)((workingRectangle.Height / 100) * 20))));
                 var presenter = appWindow.Presenter as OverlappedPresenter;
                 presenter.IsResizable = false;

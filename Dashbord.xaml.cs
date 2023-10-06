@@ -8,8 +8,8 @@ namespace TaskTrackPro;
 
 public partial class Dashbord : ContentPage
 {
-	public Dashbord(AuthenticationResult authenticationResult)
-	{
+    public Dashbord(AuthenticationResult authenticationResult)
+    {
 
         InitializeComponent();
         something(authenticationResult);
@@ -31,11 +31,12 @@ public partial class Dashbord : ContentPage
             if (response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("Response: " + content);
+                await CommonClass.SetUserDataAsync(content);
+                UserNameLbl.Text = CommonClass.userModel.DisplayName;
+                UserRole.Text = CommonClass.userModel.JobTitle;
             }
             else
             {
-                Console.WriteLine("Error: " + response.StatusCode);
             }
         }
 
@@ -65,5 +66,11 @@ public partial class Dashbord : ContentPage
                 Console.WriteLine("Error: " + response.StatusCode);
             }
         }
+    }
+
+
+    private void HomeBtn_Clicked(object sender, EventArgs e)
+    {
+        MainContent.Content = new HomePage();
     }
 }

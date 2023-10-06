@@ -33,9 +33,9 @@ namespace TaskTrackPro
                         window.ExtendsContentIntoTitleBar = true;
                         if (winuiAppWindow.Presenter is OverlappedPresenter p)
                         {
-                            p.IsResizable = true;
+                            p.IsResizable = false;
                             p.IsMaximizable = false;
-                            p.SetBorderAndTitleBar(false, false);
+                            p.IsMinimizable = false;
                         }
                         winuiAppWindow.Closing += async (s, e) =>
                         {
