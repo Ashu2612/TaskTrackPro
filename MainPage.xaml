@@ -1,65 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TaskTrackPro.MainPage" BackgroundImageSource="nature_background.jpg" >
-
-    <Grid VerticalOptions="Center">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="540" />
-            <RowDefinition Height="20" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="40"/>
-        </Grid.ColumnDefinitions>
-        <BoxView Grid.Row="1" Grid.Column="1" Color="White" Opacity="0.5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <BoxView.Shadow>
-                <Shadow></Shadow>
-            </BoxView.Shadow>
-        </BoxView>
-
-        <Grid Grid.Row="1" Grid.Column="1">
+             xmlns:models="clr-namespace:TaskTrackPro.Models"
+             x:Class="TaskTrackPro.MainPage" BackgroundColor="#f0f0f0">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    <ContentPage.Resources>
+        <x:String x:Key="Dashbord">&#xf5d1;</x:String>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="460" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="450"/>
             </Grid.ColumnDefinitions>
-
-            <Image Source="logo_caliber_horizontal.png" Grid.Row="1" Grid.Column="0" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-            <!--<BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="20" Color="White" Opacity="0.7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <BoxView Grid.Row="0" Grid.Column="1" Color="White" Opacity="0.5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <BoxView.Shadow>
                     <Shadow Opacity="0.1"></Shadow>
                 </BoxView.Shadow>
-            </BoxView>-->
-            <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="20" >
+            </BoxView>
+            <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"  Color="White" MinimumWidthRequest="180" MinimumHeightRequest="1000" Opacity="0.5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <BoxView.Shadow>
+                    <Shadow Opacity="0.1"></Shadow>
+                </BoxView.Shadow>
+            </BoxView>
+            <Grid Grid.Row="0" Grid.RowSpan="1" Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="60" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="160" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="1" Text="TaskTracker Pro" FontSize="Large" HorizontalOptions="Center"></Label>
-                <Label Grid.Row="3" Text="Sign in" HorizontalOptions="Center"></Label>
-                <Button Grid.Row="8" HeightRequest="15" Text="Sign in with Microsoft account" WidthRequest="280" x:Name="LoginBtn" Clicked="LoginBtn_Clicked" BackgroundColor="#4caef5">
-                    <Button.Shadow>
-                        <Shadow Brush="#b9c3c9"></Shadow>
-                    </Button.Shadow>
-                </Button>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="UserNameLbl" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Start" MaximumHeightRequest="30" MinimumWidthRequest="80" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
+                <Label x:Name="UserRole" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="End" MaximumHeightRequest="30" FontSize="12" MinimumWidthRequest="180" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
+                <Border Grid.Column="2" Grid.RowSpan="2" HeightRequest="30"  
+                    WidthRequest="30"
+                    StrokeShape="RoundRectangle 80,80,80,80"
+                    HorizontalOptions="Center"
+                    StrokeThickness="3"
+                    Margin="0,0,0,0">
+                    <Image Grid.Column="4"
+                    Aspect="AspectFit"
+                     x:Name="UserNameImg"
+                    HeightRequest="30"
+                    WidthRequest="30"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End" />
+                </Border>
             </Grid>
-        </Grid>
-    </Grid>
+            <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                </Grid.RowDefinitions>
+                <Label  Grid.Row="0" FontFamily="FontAwesome" Text="rocket" FontSize="25"/>
+                <Border Grid.Row="0">
+                    <Grid>
+                        <Button Text="{x:Static models:Icons.DashbordIcon}" Clicked="Dashbord_Tapped" FontSize="20" TextColor="#88c2b0" FontFamily="MaterialIcons" BackgroundColor="#daede7" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="180" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"/>
+                        <Label Text="Dashbord" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Dashbord_Tapped">
+                        </TapGestureRecognizer>
+                    </Border.GestureRecognizers>
+                </Border>
+            </Grid>
+            <ContentView x:Name="MainContent" Grid.RowSpan="2" Grid.Column="1" Grid.Row="1">
 
+            </ContentView>
+        </Grid>
+    </VerticalStackLayout>
 </ContentPage>

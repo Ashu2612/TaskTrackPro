@@ -53,6 +53,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+
+	  <None Remove="Resources\Fonts\MaterialIcons-Regular.ttf" />
 	  <None Remove="Resources\Images\desk_background.jpg" />
 	  <None Remove="Resources\Images\logo_caliber_horizontal.png" />
 	  <None Remove="Resources\Images\nature_background.jpg" />
@@ -70,6 +72,8 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Identity.Client" Version="4.56.0" />
+		<PackageReference Include="Microsoft.TeamFoundationServer.Client" Version="16.205.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="16.205.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
@@ -78,6 +82,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

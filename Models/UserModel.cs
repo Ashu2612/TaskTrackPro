@@ -12,8 +12,16 @@ namespace TaskTrackPro.Models
         public string UserName { get; set; }
         public string UserEmail { get; set; }
         public string DisplayName { get; set; }
+        public string AccessToken { get; set; }
         public string JobTitle { get; set; }
         public byte[] UserProfilePic { get; set; }
     }
+
+    public class Icons 
+    {
+        public static string DashbordIcon = "\ue871";
+
+    }
+
 
 }

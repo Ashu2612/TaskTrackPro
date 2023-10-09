@@ -17,6 +17,10 @@ namespace TaskTrackPro
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("FA-Free-Regular-400.0tf", "FontAwesome");
+                    fonts.AddFont("FA-Regular-400.0tf", "FABR");
+                    fonts.AddFont("FA-Free-Solid-900.0tf", "FAS");
+                    fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons");
                 });
 #if WINDOWS
             builder.ConfigureLifecycleEvents(events =>
