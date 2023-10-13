@@ -15,12 +15,11 @@ namespace TaskTrackPro
 {
     public partial class MainPage : ContentPage
     {
-
         public MainPage(AuthenticationResult authenticationResult)
         {
             InitializeComponent();
-            
             something(authenticationResult);
+            MainContent.Content = new ViewModels.DashbordView();
         }
         public async void something(AuthenticationResult authenticationResult)
         {
@@ -71,78 +70,110 @@ namespace TaskTrackPro
                 }
                 else
                 {
-                    Console.WriteLine("Error: " + response.StatusCode);
+
                 }
             }
         }
-        public static void SampleREST()
+        private Button previouslyPressedButton = null;
+
+        private void DashbordBtn_Clicked(object sender, EventArgs e)
         {
-            string collectionUri = "http://cqmdevops03:8080/tfs";
-            string teamProjectName = "CaliberRE";
-            VssConnection connection = new VssConnection(new Uri(collectionUri), new VssOAuthAccessTokenCredential(CommonClass.userModel.AccessToken));
-
-            WorkItemTrackingHttpClient witClient = connection.GetClient<WorkItemTrackingHttpClient>();
-            List<TeamProjectCollectionReference> collections = (List<TeamProjectCollectionReference>)connection.GetClient<ProjectCollectionHttpClient>().GetProjectCollections().Result;
-
-            List<QueryHierarchyItem> queryHierarchyItems = witClient.GetQueriesAsync(teamProjectName, depth: 2).Result;
-
-            QueryHierarchyItem myQueriesFolder = queryHierarchyItems.FirstOrDefault(qhi => qhi.Name.Equals("My Queries"));
-            if (myQueriesFolder != null)
+            try
             {
-                string queryName = "REST Sample";
-
-                QueryHierarchyItem newBugsQuery = null;
-                if (myQueriesFolder.Children != null)
-                {
-                    newBugsQuery = myQueriesFolder.Children.FirstOrDefault(qhi => qhi.Name.Equals(queryName));
-                }
-                if (newBugsQuery == null)
-                {
-                    newBugsQuery = new QueryHierarchyItem()
-                    {
-                        Name = queryName,
-                        Wiql = "SELECT [System.Id],[System.WorkItemType],[System.Title],[System.AssignedTo],[System.State],[System.Tags] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.WorkItemType] = 'Bug' AND [System.State] = 'New'",
-                        IsFolder = false
-                    };
-                    newBugsQuery = witClient.CreateQueryAsync(newBugsQuery, teamProjectName, myQueriesFolder.Name).Result;
-                }
-                WorkItemQueryResult result = witClient.QueryByIdAsync(newBugsQuery.Id).Result;
-
-                if (result.WorkItems.Any())
-                {
-                    int skip = 0;
-                    const int batchSize = 100;
-                    IEnumerable<WorkItemReference> workItemRefs;
-                    do
-                    {
-                        workItemRefs = result.WorkItems.Skip(skip).Take(batchSize);
-                        if (workItemRefs.Any())
-                        {
-                            List<WorkItem> workItems = witClient.GetWorkItemsAsync(workItemRefs.Select(wir => wir.Id)).Result;
-                            foreach (WorkItem workItem in workItems)
-                            {
-
-                            }
-                        }
-                        skip += batchSize;
-                    }
-                    while (workItemRefs.Count() == batchSize);
-                }
-                else
-                {
-                    Console.WriteLine("No work items were returned from query.");
-                }
+                AddTaskCation.TextColor = Color.FromRgba("#666666");
+                ProjectCaption.TextColor = Color.FromRgba("#666666");
+                TasksCaption.TextColor = Color.FromRgba("#666666");
+                previouslyPressedButton.TextColor = Color.FromRgba("#a3a3a3");
+                previouslyPressedButton.BackgroundColor = Color.FromRgba("#0000");
             }
+            catch { }
+
+
+            DasbordBtn.TextColor = Color.FromRgba("#88c2b0");
+            DasbordBtn.BackgroundColor = Color.FromRgba("#daede7");
+            DashbordCaption.TextColor = Color.FromRgba("#6aad98");
+            try
+            {
+                MainContent.Content = new ViewModels.DashbordView();
+                previouslyPressedButton = DasbordBtn;
+            }
+            catch { }
+
+        }
+        private void ProjectBtn_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                DasbordBtn.TextColor = Color.FromRgba("#a3a3a3");
+                DasbordBtn.BackgroundColor = Color.FromRgba("#0000");
+                AddTaskCation.TextColor = Color.FromRgba("#666666");
+                DashbordCaption.TextColor = Color.FromRgba("#666666");
+                TasksCaption.TextColor = Color.FromRgba("#666666");
+
+                previouslyPressedButton.TextColor = Color.FromRgba("#a3a3a3");
+                previouslyPressedButton.BackgroundColor = Color.FromRgba("#0000");
+            }
+            catch { }
+
+            ProjectBtn.TextColor = Color.FromRgba("#88c2b0");
+            ProjectBtn.BackgroundColor = Color.FromRgba("#daede7");
+            ProjectCaption.TextColor = Color.FromRgba("#6aad98");
+            try
+            {
+                MainContent.Content = new ViewModels.ProjectsView();
+                previouslyPressedButton = ProjectBtn;
+            }
+            catch { }
         }
 
-        private void HomeBtn_Clicked(object sender, EventArgs e)
+        private void TasksBtn_Clicked(object sender, EventArgs e)
         {
-            MainContent.Content = new HomePage();
+            try
+            {
+                DasbordBtn.TextColor = Color.FromRgba("#a3a3a3");
+                DasbordBtn.BackgroundColor = Color.FromRgba("#0000");
+                DashbordCaption.TextColor = Color.FromRgba("#666666");
+                AddTaskCation.TextColor = Color.FromRgba("#666666");
+                ProjectCaption.TextColor = Color.FromRgba("#666666");
+                previouslyPressedButton.TextColor = Color.FromRgba("#a3a3a3");
+                previouslyPressedButton.BackgroundColor = Color.FromRgba("#0000");
+            }
+            catch { }
+
+            TasksBtn.TextColor = Color.FromRgba("#88c2b0");
+            TasksBtn.BackgroundColor = Color.FromRgba("#daede7");
+            TasksCaption.TextColor = Color.FromRgba("#6aad98");
+            try
+            {
+                MainContent.Content = new ViewModels.TasksView();
+                previouslyPressedButton = TasksBtn;
+            }
+            catch { }
         }
 
-        private void Dashbord_Tapped(object sender, EventArgs e)
+        private void AddTaskBtn_Clicked(object sender, EventArgs e)
         {
+            try
+            {
+                DasbordBtn.TextColor = Color.FromRgba("#a3a3a3");
+                DasbordBtn.BackgroundColor = Color.FromRgba("#0000");
+                DashbordCaption.TextColor = Color.FromRgba("#666666");
+                ProjectCaption.TextColor = Color.FromRgba("#666666");
+                TasksCaption.TextColor = Color.FromRgba("#666666");
+                previouslyPressedButton.TextColor = Color.FromRgba("#a3a3a3");
+                previouslyPressedButton.BackgroundColor = Color.FromRgba("#0000");
+            }
+            catch { }
 
+            AddTaskBtn.TextColor = Color.FromRgba("#88c2b0");
+            AddTaskBtn.BackgroundColor = Color.FromRgba("#daede7");
+            AddTaskCation.TextColor = Color.FromRgba("#6aad98");
+            try
+            {
+                MainContent.Content = new ViewModels.AssignTaskView();
+                previouslyPressedButton = AddTaskBtn;
+            }
+            catch { }
         }
     }
 }

@@ -6,9 +6,6 @@
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
     </Shell.BackButtonBehavior>
-    <ContentPage.Resources>
-        <x:String x:Key="Dashbord">&#xf5d1;</x:String>
-    </ContentPage.Resources>
     <VerticalStackLayout>
         <Grid>
             <Grid.RowDefinitions>
@@ -25,7 +22,7 @@
                     <Shadow Opacity="0.1"></Shadow>
                 </BoxView.Shadow>
             </BoxView>
-            <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"  Color="White" MinimumWidthRequest="180" MinimumHeightRequest="1000" Opacity="0.5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="0"  Color="White" MinimumWidthRequest="170" MinimumHeightRequest="1000" Opacity="0.5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <BoxView.Shadow>
                     <Shadow Opacity="0.1"></Shadow>
                 </BoxView.Shadow>
@@ -41,20 +38,20 @@
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="UserNameLbl" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Start" MaximumHeightRequest="30" MinimumWidthRequest="80" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
-                <Label x:Name="UserRole" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="End" MaximumHeightRequest="30" FontSize="12" MinimumWidthRequest="180" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
+                <Label x:Name="UserRole" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="End" MaximumHeightRequest="30" FontSize="12" MinimumWidthRequest="170" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
                 <Border Grid.Column="2" Grid.RowSpan="2" HeightRequest="30"  
-                    WidthRequest="30"
-                    StrokeShape="RoundRectangle 80,80,80,80"
-                    HorizontalOptions="Center"
-                    StrokeThickness="3"
-                    Margin="0,0,0,0">
+                 WidthRequest="30"
+                 StrokeShape="RoundRectangle 80,80,80,80"
+                 HorizontalOptions="Center"
+                 StrokeThickness="3"
+                 Margin="0,0,0,0">
                     <Image Grid.Column="4"
-                    Aspect="AspectFit"
-                     x:Name="UserNameImg"
-                    HeightRequest="30"
-                    WidthRequest="30"
-                    VerticalOptions="Center"
-                    HorizontalOptions="End" />
+                 Aspect="AspectFit"
+                  x:Name="UserNameImg"
+                 HeightRequest="30"
+                 WidthRequest="30"
+                 VerticalOptions="Center"
+                 HorizontalOptions="End" />
                 </Border>
             </Grid>
             <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="0">
@@ -62,20 +59,64 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <Label  Grid.Row="0" FontFamily="FontAwesome" Text="rocket" FontSize="25"/>
-                <Border Grid.Row="0">
+                <Label Grid.Row="0" HeightRequest="20"></Label>
+
+                <Border Grid.Row="1" Stroke="Transparent">
                     <Grid>
-                        <Button Text="{x:Static models:Icons.DashbordIcon}" Clicked="Dashbord_Tapped" FontSize="20" TextColor="#88c2b0" FontFamily="MaterialIcons" BackgroundColor="#daede7" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="180" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"/>
-                        <Label Text="Dashbord" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        <Button Text="{x:Static models:Icons.DashbordIcon}" Clicked="DashbordBtn_Clicked" x:Name="DasbordBtn" FontSize="20" TextColor="#88c2b0" FontFamily="MaterialIcons" BackgroundColor="#daede7" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="170" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"></Button>
+                        <Label x:Name="DashbordCaption" Text="Dashbord" VerticalOptions="Center" TextColor="#6aad98" HorizontalOptions="Center"/>
                     </Grid>
                     <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="Dashbord_Tapped">
+                        <TapGestureRecognizer Tapped="DashbordBtn_Clicked">
                         </TapGestureRecognizer>
                     </Border.GestureRecognizers>
                 </Border>
+
+                <Label Grid.Row="2" Text="Me" MinimumWidthRequest="170" MinimumHeightRequest="20" FontSize="13" TextColor="#88898a" HorizontalOptions="Start" Margin="10"></Label>
+
+                <Border Grid.Row="3" Stroke="Transparent">
+                    <Grid>
+                        <Button Text="{x:Static models:Icons.ProjectIcon}" Clicked="ProjectBtn_Clicked" x:Name="ProjectBtn" FontSize="20" TextColor="#a3a3a3" FontFamily="MaterialIcons" BackgroundColor="Transparent" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="170" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"/>
+                        <Label x:Name="ProjectCaption" Text="Projects" VerticalOptions="Center" TextColor="#666666" HorizontalOptions="Center"/>
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ProjectBtn_Clicked">
+                        </TapGestureRecognizer>
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <Border Grid.Row="4" Stroke="Transparent">
+                    <Grid>
+                        <Button Text="{x:Static models:Icons.TaskIcon}" Clicked="TasksBtn_Clicked" x:Name="TasksBtn" FontSize="20" TextColor="#a3a3a3" FontFamily="MaterialIcons" BackgroundColor="Transparent" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="170" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"/>
+                        <Label x:Name="TasksCaption" Text="My Tasks" VerticalOptions="Center" TextColor="#666666" HorizontalOptions="Center"/>
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TasksBtn_Clicked">
+                        </TapGestureRecognizer>
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <Label Grid.Row="5" Text="Team" MinimumWidthRequest="170" MinimumHeightRequest="20" FontSize="13" TextColor="#88898a" HorizontalOptions="Start" Margin="10"></Label>
+
+                <Border Grid.Row="6" Stroke="Transparent">
+                    <Grid>
+                        <Button Text="{x:Static models:Icons.AddTaskIcon}" Clicked="AddTaskBtn_Clicked" x:Name="AddTaskBtn" FontSize="20" TextColor="#a3a3a3" FontFamily="MaterialIcons" BackgroundColor="Transparent" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="170" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"/>
+                        <Label x:Name="AddTaskCation" Text="Assign Tasks" VerticalOptions="Center" TextColor="#666666" HorizontalOptions="Center"/>
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="AddTaskBtn_Clicked">
+                        </TapGestureRecognizer>
+                    </Border.GestureRecognizers>
+                </Border>
+
             </Grid>
             <ContentView x:Name="MainContent" Grid.RowSpan="2" Grid.Column="1" Grid.Row="1">
 

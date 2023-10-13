@@ -17,9 +17,12 @@ namespace TaskTrackPro.Models
         public byte[] UserProfilePic { get; set; }
     }
 
-    public class Icons 
+    public class Icons
     {
         public static string DashbordIcon = "\ue871";
+        public static string ProjectIcon = "\ue8f9";
+        public static string TaskIcon = "\uf075";
+        public static string AddTaskIcon = "\uf848";
 
     }
 
