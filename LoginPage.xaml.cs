@@ -7,7 +7,8 @@ public partial class LoginPage : ContentPage
 	public LoginPage()
 	{
 		InitializeComponent();
-	}
+        CommonClass.projectDetails = new();
+    }
     private async void LoginBtn_Clicked(object sender, EventArgs e)
     {
         string clientId = "087c68d2-fc42-4758-9ab5-53a9cf8d076f";

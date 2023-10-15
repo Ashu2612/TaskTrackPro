@@ -10,6 +10,10 @@ namespace TaskTrackPro
     {
         public static AuthenticationResult authenticationResult;
         public static UserModel userModel { get; set; }
+        public static ProjectDetails projectDetails {  get; set; }
+        public static Projects Projects { get; set; }
+        public static ApplicationData applicationData { get; set; }
+
 
         public static Task SetUserDataAsync(string UseraDtaJson, string accesstoken)
         {

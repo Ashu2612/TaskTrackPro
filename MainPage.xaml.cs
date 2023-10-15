@@ -120,7 +120,7 @@ namespace TaskTrackPro
             ProjectCaption.TextColor = Color.FromRgba("#6aad98");
             try
             {
-                MainContent.Content = new ViewModels.ProjectsView();
+                MainContent.Content = new Views.ProjectsView();
                 previouslyPressedButton = ProjectBtn;
             }
             catch { }
