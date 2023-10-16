@@ -19,7 +19,7 @@ namespace TaskTrackPro
         {
             InitializeComponent();
             something(authenticationResult);
-            MainContent.Content = new ViewModels.DashbordView();
+            MainContent.Content = new Views.DashbordView();
         }
         public async void something(AuthenticationResult authenticationResult)
         {
@@ -94,7 +94,7 @@ namespace TaskTrackPro
             DashbordCaption.TextColor = Color.FromRgba("#6aad98");
             try
             {
-                MainContent.Content = new ViewModels.DashbordView();
+                MainContent.Content = new Views.DashbordView();
                 previouslyPressedButton = DasbordBtn;
             }
             catch { }
@@ -145,7 +145,7 @@ namespace TaskTrackPro
             TasksCaption.TextColor = Color.FromRgba("#6aad98");
             try
             {
-                MainContent.Content = new ViewModels.TasksView();
+                MainContent.Content = new Views.TasksView();
                 previouslyPressedButton = TasksBtn;
             }
             catch { }
@@ -170,7 +170,7 @@ namespace TaskTrackPro
             AddTaskCation.TextColor = Color.FromRgba("#6aad98");
             try
             {
-                MainContent.Content = new ViewModels.AssignTaskView();
+                MainContent.Content = new Views.AssignTasksView();
                 previouslyPressedButton = AddTaskBtn;
             }
             catch { }

@@ -4,7 +4,7 @@
              x:Class="TaskTrackPro.Views.DashbordView">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="" FontSize="100"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
     </VerticalStackLayout>

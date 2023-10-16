@@ -10,8 +10,11 @@ namespace TaskTrackPro.Models
     public class ProjectDetails
     {
         public List<ProjectCollections> ProjectCollections { get; set; }
-        public List<ProjectCollections> SelectedProjectCollection { get; set; }
+        public ProjectCollections SelectedProjectCollection { get; set; }
         public List<Projects> Projects { get; set; }
+        public List<WorkItems> WorkItems { get; set; }
+        public Projects SelectedProject { get; set; }
+        public List<Guid> SelectedProjectId { get; set; }
         public List<Guid> SelectedCollectionId { get; set; }
     }
     public class ApplicationData
@@ -31,10 +34,16 @@ namespace TaskTrackPro.Models
         public Guid Id { get; set; }
     }
 
+    public class WorkItems
+    {
+        public string Title { get; set; }
+        public string Status { get; set; }
+        public TimeOnly RemainingHours { get; set; }
+    }
 
     public class Projects
     {
         public string ProjectName { get; set; }
-        public string ProjectUri { get; set; }
+        public Guid Id { get; set; }
     }
 }

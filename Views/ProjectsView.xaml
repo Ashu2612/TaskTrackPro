@@ -4,7 +4,6 @@
              x:Class="TaskTrackPro.Views.ProjectsView">
     <ScrollView>
         <Grid x:Name="MainGrid">
-            
         </Grid>
     </ScrollView>
 </ContentView>
