@@ -37,6 +37,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
+                <Button x:Name="BackBtn" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Text="Back"></Button>
                 <Label x:Name="UserNameLbl" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Start" MaximumHeightRequest="30" MinimumWidthRequest="80" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
                 <Label x:Name="UserRole" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="End" MaximumHeightRequest="30" FontSize="12" MinimumWidthRequest="170" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
                 <Border Grid.Column="2" Grid.RowSpan="2" HeightRequest="30"  

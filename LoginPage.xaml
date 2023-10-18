@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TaskTrackPro.LoginPage" BackgroundImageSource="nature_background.jpg">
+             x:Class="TaskTrackPro.LoginPage" BackgroundImageSource="dragon_scales1.png">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
     </Shell.BackButtonBehavior>
@@ -16,7 +16,7 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
-        <BoxView Grid.Row="1" Grid.Column="1" Color="White" Opacity="0.5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <BoxView Grid.Row="1" Grid.Column="1" Color="White" Opacity="0.2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <BoxView.Shadow>
                 <Shadow></Shadow>
             </BoxView.Shadow>
@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="450"/>
             </Grid.ColumnDefinitions>
 
-            <Image Source="logo_caliber_horizontal.png" Grid.Row="1" Grid.Column="0" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+            <!--<Image Source="logo_caliber_horizontal.png" Grid.Row="1" Grid.Column="0" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center"></Image>-->
             <!--<BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="20" Color="White" Opacity="0.7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <BoxView.Shadow>
                 <Shadow Opacity="0.1"></Shadow>
@@ -55,7 +55,7 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="1" Text="TaskTracker Pro" FontSize="Large" HorizontalOptions="Center"></Label>
                 <Label Grid.Row="3" Text="Sign in" HorizontalOptions="Center"></Label>
-                <Button Grid.Row="8" HeightRequest="15" Text="Sign in with Microsoft account" WidthRequest="280" x:Name="LoginBtn" Clicked="LoginBtn_Clicked" BackgroundColor="#4caef5">
+                <Button Grid.Row="8" HeightRequest="15" Text="Sign in with Microsoft account" WidthRequest="280" x:Name="LoginBtn" Clicked="LoginBtn_Clicked" BackgroundColor="#d151db">
                     <Button.Shadow>
                         <Shadow Brush="#b9c3c9"></Shadow>
                     </Button.Shadow>

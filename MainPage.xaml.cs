@@ -1,15 +1,6 @@
 ﻿using Microsoft.Identity.Client;
-using Microsoft.Identity.Client.Extensibility;
-using Microsoft.Identity.Client.NativeInterop;
-using Microsoft.TeamFoundation.Core.WebApi;
-using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
-using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.UI.Xaml.Media.Imaging;
-using Microsoft.VisualStudio.Services.OAuth;
-using Microsoft.VisualStudio.Services.UserAccountMapping;
-using Microsoft.VisualStudio.Services.WebApi;
 using System.Net.Http.Headers;
-using System.Security.Claims;
 
 namespace TaskTrackPro
 {
@@ -19,6 +10,7 @@ namespace TaskTrackPro
         {
             InitializeComponent();
             something(authenticationResult);
+
             MainContent.Content = new Views.DashbordView();
         }
         public async void something(AuthenticationResult authenticationResult)
@@ -175,5 +167,6 @@ namespace TaskTrackPro
             }
             catch { }
         }
+
     }
 }

@@ -1,22 +1,26 @@
 using Microsoft.TeamFoundation.Core.WebApi;
-using Microsoft.TeamFoundation.TestManagement.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.OAuth;
 using Microsoft.VisualStudio.Services.WebApi;
-using System.Net.Http.Headers;
+using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
+using Microsoft.VisualStudio.Services.WebApi.Patch;
 using TaskTrackPro.Models;
 
 namespace TaskTrackPro.Views;
 
 public partial class ProjectsView : ContentView
 {
+
     public ProjectsView()
     {
         InitializeComponent();
+        Grid views = new()
+        {
+            HorizontalOptions = LayoutOptions.Center
+        };
         ReadProjectCollections();
         DisplayCollections();
-
     }
     public void ReadProjectCollections()
     {
@@ -101,7 +105,7 @@ public partial class ProjectsView : ContentView
             {
                 setColumn = 0;
                 setRow++;
-                MainGrid.RowDefinitions.Add(new RowDefinition() { Height = 120 });
+                MainGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(2, GridUnitType.Auto) });
             }
             Button ProjectCollection = new()
             {
@@ -135,21 +139,20 @@ public partial class ProjectsView : ContentView
             MainGrid.Add(views);
             setColumn++;
         }
-
     }
     private void DisplayProjects()
     {
         MainGrid.Children.Clear();
         int colCount = 3, setRow = -1, setColumn = 0;
         for (int i = 0; i < colCount; i++)
-            MainGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 0});
+            MainGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 0 });
         for (int i = 0; i < CommonClass.projectDetails.Projects.Count; i++)
         {
             if (i % colCount == 0)
             {
                 setColumn = 0;
                 setRow++;
-                MainGrid.RowDefinitions.Add(new RowDefinition() { Height = 120 });
+                MainGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(2, GridUnitType.Auto) });
             }
             Button Project = new()
             {
@@ -186,12 +189,101 @@ public partial class ProjectsView : ContentView
         }
 
     }
+
+    private void DisplayWorkItems()
+    {
+        MainGrid.Children.Clear();
+        int colCount = 3, setRow = -1, setColumn = 0;
+        for (int i = 0; i < colCount; i++)
+            MainGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = 0 });
+        for (int i = 0; i < CommonClass.projectDetails.WorkItems.Count; i++)
+        {
+            if (i % colCount == 0)
+            {
+                setColumn = 0;
+                setRow++;
+                MainGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(2, GridUnitType.Auto) });
+            }
+            Button WorkItems = new()
+            {
+                Text = "Start",
+                FontSize = 10,
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.End,
+                BackgroundColor = Colors.AliceBlue,
+                MinimumHeightRequest = 15,
+                MinimumWidthRequest = 60,
+                Margin = 5,
+                TextColor = Colors.Black
+            };
+            WorkItems.Clicked += (sender, e) => ProjectCollection_Clicked(sender, e);
+            Label Title = new()
+            {
+                Text = CommonClass.projectDetails.WorkItems[i].Title,
+                FontSize = 14,
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Start,
+                Margin = 5
+            };
+            Label State = new()
+            {
+                Text = "State - " + CommonClass.projectDetails.WorkItems[i].Status,
+                TextColor = Color.FromRgba("#6E6E6E"),
+                FontSize = 12,
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Start,
+                Margin = 3
+            };
+            Label Hours = new()
+            {
+                Text = CommonClass.projectDetails.WorkItems[i].RemainingHours.ToString(),
+                TextColor = Color.FromRgba("#6E6E6E"),
+                FontSize = 12,
+                HorizontalOptions = LayoutOptions.Start,
+                VerticalOptions = LayoutOptions.Start,
+                Margin = 3
+            };
+            BoxView boxView1 = new()
+            {
+                Shadow = new Shadow() { Brush = Color.FromRgba("#C8C8C8") },
+                MinimumHeightRequest = 150
+
+            };
+            Grid views = new()
+            {
+                HorizontalOptions = LayoutOptions.Center,
+                Margin = 10
+            };
+
+            views.AddRowDefinition(new() { Height = new GridLength(2, GridUnitType.Auto) });
+            views.AddRowDefinition(new() { Height = new GridLength(2, GridUnitType.Auto) });
+            views.AddRowDefinition(new() { Height = new GridLength(2, GridUnitType.Auto) });
+            views.AddColumnDefinition(new() { Width = 170 });
+            views.AddColumnDefinition(new() { Width = 80 });
+            MainGrid.SetRow(views, setRow);
+            MainGrid.SetColumn(views, setColumn);
+            views.SetColumnSpan(boxView1, 2);
+            views.SetRowSpan(boxView1, 3);
+            views.Add(boxView1);
+            views.Add(WorkItems, 1, 2);
+            views.SetColumnSpan(State, 2);
+            views.Add(State, 0, 1);
+            views.Add(Hours, 0, 2);
+            views.SetColumnSpan(Title, 2);
+            views.Add(Title, 0, 0);
+            MainGrid.Add(views);
+            setColumn++;
+
+        }
+    }
+
     private void Project_Clicked(object sender, EventArgs e)
     {
         CommonClass.projectDetails.SelectedProjectId = new();
         Button button = (Button)sender;
         CommonClass.projectDetails.SelectedProjectId.Add(Guid.Parse(button.StyleId));
         ReadWorkItems();
+        DisplayWorkItems();
     }
     private void ProjectCollection_Clicked(object sender, EventArgs e)
     {
@@ -218,11 +310,67 @@ public partial class ProjectsView : ContentView
 
             List<TeamProjectReference> teamProjectReferences = (List<TeamProjectReference>)connection.GetClient<ProjectHttpClient>().GetProjects().Result;
             CommonClass.projectDetails.Projects = new();
-            foreach(TeamProjectReference teamProjectReference in teamProjectReferences)
+            foreach (TeamProjectReference teamProjectReference in teamProjectReferences)
             {
                 CommonClass.projectDetails.Projects.Add(new Projects { ProjectName = teamProjectReference.Name, Id = teamProjectReference.Id });
             }
 
+
+        }
+        catch (Exception ex) { }
+    }
+    private async void UpdateWokItemState()
+    {
+        CommonClass.projectDetails.SelectedProject = new();
+        CommonClass.projectDetails.SelectedProject = CommonClass.projectDetails.Projects.Find(x => CommonClass.projectDetails.SelectedProjectId.Contains(Guid.Parse(x.Id.ToString())));
+
+        string collectionUri = "http://cqmdevops03:8080/tfs" + "/" + CommonClass.projectDetails.SelectedProjectCollection.Name;
+
+        VssConnection connection = new VssConnection(new Uri(collectionUri), new VssOAuthAccessTokenCredential(CommonClass.userModel.AccessToken));
+
+        WorkItemTrackingHttpClient witClient = connection.GetClient<WorkItemTrackingHttpClient>();
+
+        try
+        {
+            List<QueryHierarchyItem> queryHierarchyItems = witClient.GetQueriesAsync(CommonClass.projectDetails.SelectedProject.ProjectName, depth: 2).Result;
+            JsonPatchDocument patchDocument = new JsonPatchDocument();
+            patchDocument.Add(
+                new JsonPatchOperation()
+                {
+                    Operation = Operation.Replace,
+                    Path = "/fields/System.State",
+                    Value = "InProgress" // Replace with the desired state
+                });
+
+            WorkItem updatedWorkItem = await witClient.UpdateWorkItemAsync(patchDocument, int.Parse(CommonClass.projectDetails.SelectedWorkItem.Id.ToString()));
+
+        }
+        catch (Exception ex) { }
+    }
+    private async Task UpdateWokItemRemainingHoursAsync()
+    {
+        CommonClass.projectDetails.SelectedProject = new();
+        CommonClass.projectDetails.SelectedProject = CommonClass.projectDetails.Projects.Find(x => CommonClass.projectDetails.SelectedProjectId.Contains(Guid.Parse(x.Id.ToString())));
+
+        string collectionUri = "http://cqmdevops03:8080/tfs" + "/" + CommonClass.projectDetails.SelectedProjectCollection.Name;
+
+        VssConnection connection = new VssConnection(new Uri(collectionUri), new VssOAuthAccessTokenCredential(CommonClass.userModel.AccessToken));
+
+        WorkItemTrackingHttpClient witClient = connection.GetClient<WorkItemTrackingHttpClient>();
+
+        try
+        {
+            List<QueryHierarchyItem> queryHierarchyItems = witClient.GetQueriesAsync(CommonClass.projectDetails.SelectedProject.ProjectName, depth: 2).Result;
+            JsonPatchDocument patchDocument = new JsonPatchDocument();
+            patchDocument.Add(
+                new JsonPatchOperation()
+                {
+                    Operation = Operation.Add,
+                    Path = "/fields/Microsoft.VSTS.Scheduling.RemainingWork",
+                    Value = 8 // Replace with the desired remaining work hours
+                });
+
+            WorkItem updatedWorkItem = await witClient.UpdateWorkItemAsync(patchDocument, int.Parse(CommonClass.projectDetails.SelectedWorkItem.Id.ToString()));
 
         }
         catch (Exception ex) { }
@@ -248,32 +396,32 @@ public partial class ProjectsView : ContentView
             if (myQueriesFolder != null)
             {
                 CommonClass.projectDetails.WorkItems = new();
-                string queryName = "REST Sample4";
+                string queryName = "REST Sample6";
 
                 QueryHierarchyItem newBugsQuery = null;
                 if (myQueriesFolder.Children != null)
                 {
                     newBugsQuery = myQueriesFolder.Children.FirstOrDefault(qhi => qhi.Name.Equals(queryName));
                 }
-                //if (newBugsQuery == null)
-                //{
+                if (newBugsQuery == null)
+                {
                     newBugsQuery = new QueryHierarchyItem()
                     {
                         Name = queryName,
-                        Wiql = $"SELECT [System.Id],[System.WorkItemType],[System.Title],[System.State],[System.Tags],[Microsoft.VSTS.Scheduling.RemainingWork] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.AssignedTo] = '{CommonClass.userModel.UserName}'",
+                        Wiql = $"SELECT [System.Id],[System.WorkItemType],[System.Title],[System.State],[System.Tags],[Microsoft.VSTS.Scheduling.RemainingWork],[Microsoft.VSTS.Scheduling.CompletedWork] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.State] <> 'Done' AND [System.AssignedTo] = @Me",
                         IsFolder = false
                     };
-                try
-                {
-                    newBugsQuery = witClient.CreateQueryAsync(newBugsQuery, CommonClass.projectDetails.SelectedProject.ProjectName, myQueriesFolder.Name).Result;
+                    try
+                    {
+                        newBugsQuery = witClient.CreateQueryAsync(newBugsQuery, CommonClass.projectDetails.SelectedProject.ProjectName, myQueriesFolder.Name).Result;
 
+                    }
+                    catch
+                    {
+                        _ = witClient.DeleteQueryAsync(CommonClass.projectDetails.SelectedProject.ProjectName, queryName);
+                        newBugsQuery = witClient.CreateQueryAsync(newBugsQuery, CommonClass.projectDetails.SelectedProject.ProjectName, myQueriesFolder.Name).Result;
+                    }
                 }
-                catch
-                {
-                    _ = witClient.DeleteQueryAsync(CommonClass.projectDetails.SelectedProject.ProjectName, queryName);
-                    newBugsQuery = witClient.CreateQueryAsync(newBugsQuery, CommonClass.projectDetails.SelectedProject.ProjectName, myQueriesFolder.Name).Result;
-                }
-                //}
                 WorkItemQueryResult result = witClient.QueryByIdAsync(newBugsQuery.Id).Result;
 
                 if (result.WorkItems.Any())
@@ -289,7 +437,7 @@ public partial class ProjectsView : ContentView
                             List<WorkItem> workItems = witClient.GetWorkItemsAsync(workItemRefs.Select(wir => wir.Id)).Result;
                             foreach (WorkItem workItem in workItems)
                             {
-                                CommonClass.projectDetails.WorkItems.Add(new() { Title = workItem.Fields["System.Title"].ToString() /*RemainingHours = TimeOnly.Parse(workItem.Fields["Microsoft.VSTS.Scheduling.RemainingWork"].ToString())*/, Status = workItem.Fields["System.State"].ToString() });
+                                CommonClass.projectDetails.WorkItems.Add(new() { Id = workItem.Id, IterationPath = workItem.Fields["System.IterationPath"].ToString(), Title = workItem.Fields["System.Title"].ToString(), RemainingHours = int.Parse(workItem.Fields["Microsoft.VSTS.Scheduling.RemainingWork"].ToString()), Status = workItem.Fields["System.State"].ToString() });
                             }
                         }
                         skip += batchSize;
@@ -298,7 +446,7 @@ public partial class ProjectsView : ContentView
                 }
                 else
                 {
-                    Console.WriteLine("No work items were returned from query.");
+
                 }
 
             }

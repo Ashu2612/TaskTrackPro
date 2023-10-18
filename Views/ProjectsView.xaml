@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TaskTrackPro.Views.ProjectsView">
     <ScrollView>
-        <Grid x:Name="MainGrid">
-        </Grid>
+        <VerticalStackLayout x:Name="MainView">
+            <Grid x:Name="MainGrid">
+            </Grid>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentView>

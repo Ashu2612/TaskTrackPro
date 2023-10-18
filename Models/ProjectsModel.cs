@@ -13,6 +13,8 @@ namespace TaskTrackPro.Models
         public ProjectCollections SelectedProjectCollection { get; set; }
         public List<Projects> Projects { get; set; }
         public List<WorkItems> WorkItems { get; set; }
+        public WorkItems SelectedWorkItem { get; set; }
+        public List<int> SelectedWorkItemId { get; set; }
         public Projects SelectedProject { get; set; }
         public List<Guid> SelectedProjectId { get; set; }
         public List<Guid> SelectedCollectionId { get; set; }
@@ -36,9 +38,11 @@ namespace TaskTrackPro.Models
 
     public class WorkItems
     {
+        public int? Id { get; set; }
+        public string IterationPath { get; set; }
         public string Title { get; set; }
         public string Status { get; set; }
-        public TimeOnly RemainingHours { get; set; }
+        public int RemainingHours { get; set; }
     }
 
     public class Projects
