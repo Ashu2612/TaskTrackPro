@@ -37,7 +37,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="BackBtn" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Text="Back"></Button>
+                <Button x:Name="BackBtn" Grid.Row="0" Grid.RowSpan="2" FontFamily="MaterialIcons" IsVisible="false" MinimumHeightRequest="15" BackgroundColor="Transparent" BorderColor="Transparent" BorderWidth="0" CornerRadius="0" MinimumWidthRequest="20" Grid.Column="0" HorizontalOptions="Start" TextColor="#666666" VerticalOptions="Start" Text="{x:Static models:Icons.BackIcon}"></Button>
                 <Label x:Name="UserNameLbl" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Start" MaximumHeightRequest="30" MinimumWidthRequest="80" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
                 <Label x:Name="UserRole" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="End" MaximumHeightRequest="30" FontSize="12" MinimumWidthRequest="170" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
                 <Border Grid.Column="2" Grid.RowSpan="2" HeightRequest="30"  

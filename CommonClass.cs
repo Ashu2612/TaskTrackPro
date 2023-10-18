@@ -14,6 +14,8 @@ namespace TaskTrackPro
         public static Projects Projects { get; set; }
         public static ApplicationData applicationData { get; set; }
 
+        public static Button Button = null;
+        public static Timer TaskTimer = null;
 
         public static Task SetUserDataAsync(string UseraDtaJson, string accesstoken)
         {

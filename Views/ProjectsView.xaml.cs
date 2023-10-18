@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.Services.WebApi;
 using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
 using Microsoft.VisualStudio.Services.WebApi.Patch;
 using TaskTrackPro.Models;
+using System.Windows.Input;
 
 namespace TaskTrackPro.Views;
 
@@ -19,6 +20,7 @@ public partial class ProjectsView : ContentView
         {
             HorizontalOptions = LayoutOptions.Center
         };
+        CommonClass.Button.IsVisible = false;
         ReadProjectCollections();
         DisplayCollections();
     }
@@ -96,9 +98,10 @@ public partial class ProjectsView : ContentView
     }
     private void DisplayCollections()
     {
+        MainGrid.Children.Clear();
         int colCount = 3, setRow = -1, setColumn = 0;
         for (int i = 0; i < colCount; i++)
-            MainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            MainGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(2, GridUnitType.Auto) });
         for (int i = 0; i < CommonClass.projectDetails.ProjectCollections.Count; i++)
         {
             if (i % colCount == 0)
@@ -120,7 +123,7 @@ public partial class ProjectsView : ContentView
                 BorderColor = Colors.Transparent,
                 StyleId = CommonClass.projectDetails.ProjectCollections[i].Id.ToString(),
             };
-            ProjectCollection.Clicked += (sender, e) => ProjectCollection_Clicked(sender, e);
+            ProjectCollection.Clicked += ProjectCollection_Clicked;
             BoxView boxView1 = new()
             {
                 Shadow = new Shadow() { Brush = Color.FromRgba("#C8C8C8") },
@@ -139,9 +142,11 @@ public partial class ProjectsView : ContentView
             MainGrid.Add(views);
             setColumn++;
         }
+        ActivityInd.IsRunning = false;
     }
     private void DisplayProjects()
     {
+        CommonClass.Button.IsVisible = true;
         MainGrid.Children.Clear();
         int colCount = 3, setRow = -1, setColumn = 0;
         for (int i = 0; i < colCount; i++)
@@ -167,7 +172,7 @@ public partial class ProjectsView : ContentView
                 BorderColor = Colors.Transparent,
                 StyleId = CommonClass.projectDetails.Projects[i].Id.ToString(),
             };
-            Project.Clicked += (sender, e) => Project_Clicked(sender, e);
+            Project.Clicked += Project_Clicked;
             BoxView boxView1 = new()
             {
                 Shadow = new Shadow() { Brush = Color.FromRgba("#C8C8C8") },
@@ -187,7 +192,7 @@ public partial class ProjectsView : ContentView
             MainGrid.Add(views);
             setColumn++;
         }
-
+        ActivityInd.IsRunning = false;
     }
 
     private void DisplayWorkItems()
@@ -214,9 +219,10 @@ public partial class ProjectsView : ContentView
                 MinimumHeightRequest = 15,
                 MinimumWidthRequest = 60,
                 Margin = 5,
-                TextColor = Colors.Black
+                TextColor = Colors.Black,
+                StyleId = CommonClass.projectDetails.WorkItems[i].Id.ToString()
             };
-            WorkItems.Clicked += (sender, e) => ProjectCollection_Clicked(sender, e);
+            WorkItems.Clicked += (sender, e) => WorkItem_Clicked(sender, e);
             Label Title = new()
             {
                 Text = CommonClass.projectDetails.WorkItems[i].Title,
@@ -232,16 +238,29 @@ public partial class ProjectsView : ContentView
                 FontSize = 12,
                 HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.Start,
-                Margin = 3
+                Margin = new Thickness(15, 5, 0, 0)
             };
+            var StateList = new List<string>();
+            StateList.Add("To Do");
+            StateList.Add("Removed");
+            StateList.Add("In Progress");
+            StateList.Add("Done");
+            Picker picker = new()
+            {
+                MinimumHeightRequest = 10,
+                WidthRequest = 10
+            };
+            picker.ItemsSource = StateList;
+            picker.SelectedIndexChanged += (sender, e) => Picker_SelectedIndexChanged(sender, e);
+
             Label Hours = new()
             {
-                Text = CommonClass.projectDetails.WorkItems[i].RemainingHours.ToString(),
+                Text = "Remaining Hours - " + CommonClass.projectDetails.WorkItems[i].RemainingHours.ToString(),
                 TextColor = Color.FromRgba("#6E6E6E"),
                 FontSize = 12,
                 HorizontalOptions = LayoutOptions.Start,
                 VerticalOptions = LayoutOptions.Start,
-                Margin = 3
+                Margin = new Thickness(15, 5, 0, 0)
             };
             BoxView boxView1 = new()
             {
@@ -268,6 +287,7 @@ public partial class ProjectsView : ContentView
             views.Add(WorkItems, 1, 2);
             views.SetColumnSpan(State, 2);
             views.Add(State, 0, 1);
+            views.Add(picker, 1, 1);
             views.Add(Hours, 0, 2);
             views.SetColumnSpan(Title, 2);
             views.Add(Title, 0, 0);
@@ -275,21 +295,103 @@ public partial class ProjectsView : ContentView
             setColumn++;
 
         }
+        ActivityInd.IsRunning = false;
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    private void UpdateTaskTimer()
+    {
+        Label State = new()
+        {
+            Text = "",
+            TextColor = Color.FromRgba("#6E6E6E"),
+            FontSize = 12,
+            HorizontalOptions = LayoutOptions.Start,
+            VerticalOptions = LayoutOptions.Start,
+            Margin = new Thickness(15, 5, 0, 0)
+        };
+        BoxView boxView1 = new()
+        {
+            Shadow = new Shadow() { Brush = Color.FromRgba("#C8C8C8") },
+            MinimumHeightRequest = 150
+
+        };
+        Grid views = new()
+        {
+            HorizontalOptions = LayoutOptions.Center,
+            Margin = 10
+        };
+        views.Add(boxView1);
+        MainGrid.Add(views);
+    }
+
+    private void WorkItem_Clicked(object sender, EventArgs e)
+    {
+        MainGrid.Children.Clear();
+        this.Loaded += CurrentTime;
+        CommonClass.Button.IsVisible = false;
+        CommonClass.projectDetails.SelectedWorkItemId = new();
+        Button button = (Button)sender;
+        CommonClass.projectDetails.SelectedWorkItemId.Add(int.Parse(button.StyleId));
+    }
+
+    private void CurrentTime(object sender, EventArgs e)
+    {
+         CommonClass.TaskTimer = new Timer(TimerCallback, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
+    }
+
+    private void TimerCallback(object state)
+    {
+        string currentTime = DateTime.UtcNow.ToString("T");
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            TaskTimer.Text = currentTime;
+        });
     }
 
     private void Project_Clicked(object sender, EventArgs e)
     {
+        ActivityInd.IsRunning = true;
+        CommonClass.Button.IsVisible = true;
+        CommonClass.Button.Clicked += (sender, e) => ProjectCollection_Clicked(sender, e);
         CommonClass.projectDetails.SelectedProjectId = new();
         Button button = (Button)sender;
-        CommonClass.projectDetails.SelectedProjectId.Add(Guid.Parse(button.StyleId));
+        try
+        {
+            CommonClass.projectDetails.SelectedProjectId.Add(Guid.Parse(button.StyleId));
+        }
+        catch
+        {
+            CommonClass.projectDetails.SelectedProjectId.Add(Guid.Parse(CommonClass.projectDetails.SelectedProject.Id.ToString()));
+        }
         ReadWorkItems();
         DisplayWorkItems();
     }
+    private void ProjectCollectionBack_Clicked(object sender, EventArgs e)
+    {
+        CommonClass.Button.IsVisible=false;
+        ActivityInd.IsRunning = true;
+        ReadProjectCollections();
+        DisplayCollections();
+    }
     private void ProjectCollection_Clicked(object sender, EventArgs e)
     {
+
+        CommonClass.Button.IsVisible = true;
+        CommonClass.Button.Clicked += (sender, e) => ProjectCollectionBack_Clicked(sender, e);
         CommonClass.projectDetails.SelectedCollectionId = new();
         Button button = (Button)sender;
-        CommonClass.projectDetails.SelectedCollectionId.Add(Guid.Parse(button.StyleId));
+        try
+        {
+            CommonClass.projectDetails.SelectedCollectionId.Add(Guid.Parse(button.StyleId));
+        }
+        catch
+        {
+            CommonClass.projectDetails.SelectedCollectionId.Add(Guid.Parse(CommonClass.projectDetails.SelectedProjectCollection.Id.ToString()));
+        }
         ReadProjects();
         DisplayProjects();
     }

@@ -35,7 +35,6 @@ namespace TaskTrackPro.Models
         public string Name { get; set; }
         public Guid Id { get; set; }
     }
-
     public class WorkItems
     {
         public int? Id { get; set; }

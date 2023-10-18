@@ -10,7 +10,7 @@ namespace TaskTrackPro
         {
             InitializeComponent();
             something(authenticationResult);
-
+            CommonClass.Button = BackBtn;
             MainContent.Content = new Views.DashbordView();
         }
         public async void something(AuthenticationResult authenticationResult)

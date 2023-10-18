@@ -4,7 +4,10 @@
              x:Class="TaskTrackPro.Views.ProjectsView">
     <ScrollView>
         <VerticalStackLayout x:Name="MainView">
-            <Grid x:Name="MainGrid">
+            <Grid>
+                <Grid Grid.Row="0" x:Name="MainGrid"></Grid>
+                <ActivityIndicator Grid.Row="0" x:Name="ActivityInd" HorizontalOptions="Center" VerticalOptions="Center" IsRunning="False" ></ActivityIndicator>
+                <Label x:Name="TaskTimer" HorizontalOptions="Center" VerticalOptions="Center" ></Label>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>
