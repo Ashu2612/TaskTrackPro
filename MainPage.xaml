@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <ActivityIndicator Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" x:Name="ActivityInd" AnchorX="60" HorizontalOptions="Fill" VerticalOptions="Fill" AnchorY="120" Opacity="0.6" BackgroundColor="#a2b2fa"></ActivityIndicator>
+            <ActivityIndicator Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" IsVisible="Hidden" x:Name="ActivityInd" AnchorX="60" HorizontalOptions="Fill" VerticalOptions="Fill" AnchorY="120" Opacity="0.6" BackgroundColor="#a2b2fa"></ActivityIndicator>
 
             <BoxView Grid.Row="0" Grid.Column="1" Color="White" Opacity="0.5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <BoxView.Shadow>
@@ -69,6 +69,8 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" HeightRequest="20"></Label>
 
@@ -107,15 +109,37 @@
                     </Border.GestureRecognizers>
                 </Border>
 
-                <Label Grid.Row="5" Text="Team" MinimumWidthRequest="170" MinimumHeightRequest="20" FontSize="13" TextColor="#88898a" HorizontalOptions="Start" Margin="10"></Label>
+                <Border Grid.Row="5" Stroke="Transparent">
+                    <Grid>
+                        <Button Text="{x:Static models:Icons.SelfActivityIcon}" Clicked="AddReportBtn_Clicked" x:Name="ActivityReportBtn" FontSize="20" TextColor="#a3a3a3" FontFamily="MaterialIcons" BackgroundColor="Transparent" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="170" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"/>
+                        <Label x:Name="ActivityReportCation" Text="My Activity" VerticalOptions="Center" TextColor="#666666" HorizontalOptions="Center"/>
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="AddReportBtn_Clicked">
+                        </TapGestureRecognizer>
+                    </Border.GestureRecognizers>
+                </Border>
 
-                <Border Grid.Row="6" Stroke="Transparent">
+                <Label Grid.Row="6" Text="My Team" MinimumWidthRequest="170" MinimumHeightRequest="20" FontSize="13" TextColor="#88898a" HorizontalOptions="Start" Margin="10"></Label>
+
+                <Border Grid.Row="7" Stroke="Transparent">
                     <Grid>
                         <Button Text="{x:Static models:Icons.AddTaskIcon}" Clicked="AddTaskBtn_Clicked" x:Name="AddTaskBtn" FontSize="20" TextColor="#a3a3a3" FontFamily="MaterialIcons" BackgroundColor="Transparent" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="170" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"/>
                         <Label x:Name="AddTaskCation" Text="Assign Tasks" VerticalOptions="Center" TextColor="#666666" HorizontalOptions="Center"/>
                     </Grid>
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="AddTaskBtn_Clicked">
+                        </TapGestureRecognizer>
+                    </Border.GestureRecognizers>
+                </Border>
+
+                <Border Grid.Row="8" Stroke="Transparent">
+                    <Grid>
+                        <Button Text="{x:Static models:Icons.TeamActivityIcon}" Clicked="TeamActivtRpt_Clicked" x:Name="TeamActivtRptBtn" FontSize="20" TextColor="#a3a3a3" FontFamily="MaterialIcons" BackgroundColor="Transparent" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="170" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"/>
+                        <Label x:Name="TeamActivtCation" Text="Team Activity" VerticalOptions="Center" TextColor="#666666" HorizontalOptions="Center"/>
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TeamActivtRpt_Clicked">
                         </TapGestureRecognizer>
                     </Border.GestureRecognizers>
                 </Border>

@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microcharts.Maui;
+using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 using Windows.Storage.Pickers;
 
 namespace TaskTrackPro
@@ -13,6 +15,7 @@ namespace TaskTrackPro
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMicrocharts()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

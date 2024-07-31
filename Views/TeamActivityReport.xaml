@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             x:Class="TaskTrackPro.Views.TeamActivityReport">
+    <ScrollView>
+        <VerticalStackLayout x:Name="MainView">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid  Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Picker Grid.Column="0" x:Name="CollectionPckr" Title="Select the Collection" MinimumWidthRequest="250" SelectedIndexChanged="CollectionPckr_SelectedIndexChanged"></Picker>
+                    <Picker Grid.Column="1" IsEnabled="False" Title="Select the Project" x:Name="ProjectPckr" WidthRequest="250" SelectedIndexChanged="ProjectPckr_SelectedIndexChanged"></Picker>
+                    <Entry Grid.Column="2" x:Name="SearChTB" Unfocused="SearChTB_Unfocused" IsEnabled="False" Placeholder="Associate Name" HeightRequest="25">
+                        
+                    </Entry>
+                </Grid>
+                <Grid Grid.Row="1" Padding="10" x:Name="MainGrid">
+                    <microcharts:ChartView x:Name="TaskChartView" HeightRequest="480"
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="FillAndExpand">
+                        <microcharts:ChartView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnChartTapped"/>
+                        </microcharts:ChartView.GestureRecognizers>
+                    </microcharts:ChartView>
+                </Grid>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>
