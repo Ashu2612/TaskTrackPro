@@ -17,6 +17,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
+            <ActivityIndicator Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" x:Name="ActivityInd" AnchorX="60" HorizontalOptions="Fill" VerticalOptions="Fill" AnchorY="120" Opacity="0.6" BackgroundColor="#a2b2fa"></ActivityIndicator>
+
             <BoxView Grid.Row="0" Grid.Column="1" Color="White" Opacity="0.5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <BoxView.Shadow>
                     <Shadow Opacity="0.1"></Shadow>
@@ -35,13 +37,13 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="BackBtn" Grid.Row="0" Grid.RowSpan="2" FontFamily="MaterialIcons" IsVisible="false" MinimumHeightRequest="15" BackgroundColor="Transparent" BorderColor="Transparent" BorderWidth="0" CornerRadius="0" MinimumWidthRequest="20" Grid.Column="0" HorizontalOptions="Start" TextColor="#666666" VerticalOptions="Start" Text="{x:Static models:Icons.BackIcon}"></Button>
                 <Label x:Name="UserNameLbl" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Start" MaximumHeightRequest="30" MinimumWidthRequest="80" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
                 <Label x:Name="UserRole" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="End" MaximumHeightRequest="30" FontSize="12" MinimumWidthRequest="170" LineBreakMode="TailTruncation" HorizontalTextAlignment="End" Margin="2"></Label>
-                <Border Grid.Column="2" Grid.RowSpan="2" HeightRequest="30"  
-                 WidthRequest="30"
+                <Border Grid.Column="2" Grid.RowSpan="2" HeightRequest="35"  
+                 WidthRequest="35"
                  StrokeShape="RoundRectangle 80,80,80,80"
                  HorizontalOptions="Center"
                  StrokeThickness="3"

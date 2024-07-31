@@ -14,9 +14,16 @@ namespace TaskTrackPro
         public static Projects Projects { get; set; }
         public static ApplicationData applicationData { get; set; }
 
-        public static Button Button = null;
+        public static Button backButton = null;
+        public static ActivityIndicator activityInd = null;
+
         public static Timer TaskTimer = null;
 
+        public static void RunIndicator(bool show)
+        {
+            activityInd.IsRunning = show;
+            activityInd.IsVisible = show;
+        }
         public static Task SetUserDataAsync(string UseraDtaJson, string accesstoken)
         {
             JObject UserData = JObject.Parse(JsonConvert.DeserializeObject(UseraDtaJson).ToString());

@@ -12,7 +12,7 @@ public partial class LoginPage : ContentPage
     private async void LoginBtn_Clicked(object sender, EventArgs e)
     {
         string clientId = "087c68d2-fc42-4758-9ab5-53a9cf8d076f";
-        string redirectUri = "TaskTrackerPro://Oauth";
+        string redirectUri = "http://localhost";
         string[] scopes = { "openid", "profile", "user.read" }; // Add the required scopes
         TimeSpan tokenExpiration = TimeSpan.FromHours(1);
 

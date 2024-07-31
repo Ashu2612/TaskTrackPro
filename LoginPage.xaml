@@ -34,11 +34,11 @@
             </Grid.ColumnDefinitions>
 
             <!--<Image Source="logo_caliber_horizontal.png" Grid.Row="1" Grid.Column="0" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Center"></Image>-->
-            <!--<BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="20" Color="White" Opacity="0.7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <BoxView Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="20" Color="White" Opacity="0.7" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <BoxView.Shadow>
                 <Shadow Opacity="0.1"></Shadow>
             </BoxView.Shadow>
-        </BoxView>-->
+        </BoxView>
             <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Margin="20" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />

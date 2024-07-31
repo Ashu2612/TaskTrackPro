@@ -20,12 +20,14 @@ public partial class ProjectsView : ContentView
         {
             HorizontalOptions = LayoutOptions.Center
         };
-        CommonClass.Button.IsVisible = false;
+        CommonClass.backButton.IsVisible = false;
+        CommonClass.RunIndicator(true);
         ReadProjectCollections();
         DisplayCollections();
     }
     public void ReadProjectCollections()
     {
+
         string collectionUri = "http://cqmdevops03:8080/tfs";
 
         VssConnection connection = new VssConnection(new Uri(collectionUri), new VssOAuthAccessTokenCredential(CommonClass.userModel.AccessToken));
@@ -142,11 +144,12 @@ public partial class ProjectsView : ContentView
             MainGrid.Add(views);
             setColumn++;
         }
-        ActivityInd.IsRunning = false;
+        CommonClass.activityInd.IsRunning = false;
+        CommonClass.activityInd.IsVisible = false;
     }
     private void DisplayProjects()
     {
-        CommonClass.Button.IsVisible = true;
+        CommonClass.backButton.IsVisible = true;
         MainGrid.Children.Clear();
         int colCount = 3, setRow = -1, setColumn = 0;
         for (int i = 0; i < colCount; i++)
@@ -192,7 +195,9 @@ public partial class ProjectsView : ContentView
             MainGrid.Add(views);
             setColumn++;
         }
-        ActivityInd.IsRunning = false;
+        CommonClass.activityInd.IsRunning = false;
+        CommonClass.activityInd.IsVisible = false;
+
     }
 
     private void DisplayWorkItems()
@@ -295,7 +300,9 @@ public partial class ProjectsView : ContentView
             setColumn++;
 
         }
-        ActivityInd.IsRunning = false;
+        CommonClass.activityInd.IsRunning = false;
+        CommonClass.activityInd.IsVisible = false;
+
     }
 
     private void Picker_SelectedIndexChanged(object sender, EventArgs e)
@@ -332,7 +339,7 @@ public partial class ProjectsView : ContentView
     {
         MainGrid.Children.Clear();
         this.Loaded += CurrentTime;
-        CommonClass.Button.IsVisible = false;
+        CommonClass.backButton.IsVisible = false;
         CommonClass.projectDetails.SelectedWorkItemId = new();
         Button button = (Button)sender;
         CommonClass.projectDetails.SelectedWorkItemId.Add(int.Parse(button.StyleId));
@@ -354,9 +361,9 @@ public partial class ProjectsView : ContentView
 
     private void Project_Clicked(object sender, EventArgs e)
     {
-        ActivityInd.IsRunning = true;
-        CommonClass.Button.IsVisible = true;
-        CommonClass.Button.Clicked += (sender, e) => ProjectCollection_Clicked(sender, e);
+        CommonClass.activityInd.IsRunning = true;
+        CommonClass.backButton.IsVisible = true;
+        CommonClass.backButton.Clicked += (sender, e) => ProjectCollection_Clicked(sender, e);
         CommonClass.projectDetails.SelectedProjectId = new();
         Button button = (Button)sender;
         try
@@ -372,16 +379,15 @@ public partial class ProjectsView : ContentView
     }
     private void ProjectCollectionBack_Clicked(object sender, EventArgs e)
     {
-        CommonClass.Button.IsVisible=false;
-        ActivityInd.IsRunning = true;
+        CommonClass.backButton.IsVisible=false;
+        CommonClass.activityInd.IsRunning = true;
         ReadProjectCollections();
         DisplayCollections();
     }
     private void ProjectCollection_Clicked(object sender, EventArgs e)
     {
-
-        CommonClass.Button.IsVisible = true;
-        CommonClass.Button.Clicked += (sender, e) => ProjectCollectionBack_Clicked(sender, e);
+        CommonClass.backButton.IsVisible = true;
+        CommonClass.backButton.Clicked += (sender, e) => ProjectCollectionBack_Clicked(sender, e);
         CommonClass.projectDetails.SelectedCollectionId = new();
         Button button = (Button)sender;
         try
@@ -510,7 +516,7 @@ public partial class ProjectsView : ContentView
                     newBugsQuery = new QueryHierarchyItem()
                     {
                         Name = queryName,
-                        Wiql = $"SELECT [System.Id],[System.WorkItemType],[System.Title],[System.State],[System.Tags],[Microsoft.VSTS.Scheduling.RemainingWork],[Microsoft.VSTS.Scheduling.CompletedWork] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.State] <> 'Done' AND [System.AssignedTo] = @Me",
+                        Wiql = $"SELECT [System.Id],[System.WorkItemType],[System.Title],[System.State],[System.Tags],[Microsoft.VSTS.Scheduling.CompletedWork] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.State] <> 'Done' AND [System.AssignedTo] = @Me",
                         IsFolder = false
                     };
                     try
@@ -539,7 +545,7 @@ public partial class ProjectsView : ContentView
                             List<WorkItem> workItems = witClient.GetWorkItemsAsync(workItemRefs.Select(wir => wir.Id)).Result;
                             foreach (WorkItem workItem in workItems)
                             {
-                                CommonClass.projectDetails.WorkItems.Add(new() { Id = workItem.Id, IterationPath = workItem.Fields["System.IterationPath"].ToString(), Title = workItem.Fields["System.Title"].ToString(), RemainingHours = int.Parse(workItem.Fields["Microsoft.VSTS.Scheduling.RemainingWork"].ToString()), Status = workItem.Fields["System.State"].ToString() });
+                                CommonClass.projectDetails.WorkItems.Add(new() { Id = workItem.Id, IterationPath = workItem.Fields["System.IterationPath"].ToString(), Title = workItem.Fields["System.Title"].ToString(), RemainingHours = 1, Status = workItem.Fields["System.State"].ToString() });
                             }
                         }
                         skip += batchSize;

@@ -10,9 +10,16 @@ namespace TaskTrackPro
         {
             InitializeComponent();
             something(authenticationResult);
-            CommonClass.Button = BackBtn;
+            CommonClass.backButton = BackBtn;
+            CommonClass.activityInd = ActivityInd;
             MainContent.Content = new Views.DashbordView();
         }
+        //public bool ShowIndicator(bool show)
+        //{
+        //    ActivityInd.IsRunning = show;
+        //    ActivityInd.IsVisible = show;
+        //    return ActivityInd.IsRunning;
+        //}
         public async void something(AuthenticationResult authenticationResult)
         {
             string apiEndpoint = "https://graph.microsoft.com/v1.0/me";
