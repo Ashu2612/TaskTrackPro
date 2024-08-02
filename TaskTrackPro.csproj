@@ -97,6 +97,9 @@
 	  <MauiXaml Update="Views\AssignTasksView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\BugReports.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\DashbordView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

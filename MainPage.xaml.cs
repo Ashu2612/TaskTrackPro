@@ -79,6 +79,9 @@ namespace TaskTrackPro
         {
             try
             {
+                BugReportBtn.TextColor = Color.FromRgba("#a3a3a3");
+                BugReportBtn.BackgroundColor = Color.FromRgba("#0000");
+                BugReportCation.TextColor = Color.FromRgba("#666666");
                 TeamActivtRptBtn.TextColor = Color.FromRgba("#a3a3a3");
                 TeamActivtRptBtn.BackgroundColor = Color.FromRgba("#0000");
                 TeamActivtCation.TextColor = Color.FromRgba("#666666");
@@ -109,6 +112,9 @@ namespace TaskTrackPro
         {
             try
             {
+                BugReportBtn.TextColor = Color.FromRgba("#a3a3a3");
+                BugReportBtn.BackgroundColor = Color.FromRgba("#0000");
+                BugReportCation.TextColor = Color.FromRgba("#666666");
                 TeamActivtRptBtn.TextColor = Color.FromRgba("#a3a3a3");
                 TeamActivtRptBtn.BackgroundColor = Color.FromRgba("#0000");
                 TeamActivtCation.TextColor = Color.FromRgba("#666666");
@@ -141,6 +147,9 @@ namespace TaskTrackPro
         {
             try
             {
+                BugReportBtn.TextColor = Color.FromRgba("#a3a3a3");
+                BugReportBtn.BackgroundColor = Color.FromRgba("#0000");
+                BugReportCation.TextColor = Color.FromRgba("#666666");
                 TeamActivtRptBtn.TextColor = Color.FromRgba("#a3a3a3");
                 TeamActivtRptBtn.BackgroundColor = Color.FromRgba("#0000");
                 TeamActivtCation.TextColor = Color.FromRgba("#666666");
@@ -173,6 +182,9 @@ namespace TaskTrackPro
         {
             try
             {
+                BugReportBtn.TextColor = Color.FromRgba("#a3a3a3");
+                BugReportBtn.BackgroundColor = Color.FromRgba("#0000");
+                BugReportCation.TextColor = Color.FromRgba("#666666");
                 TeamActivtRptBtn.TextColor = Color.FromRgba("#a3a3a3");
                 TeamActivtRptBtn.BackgroundColor = Color.FromRgba("#0000");
                 TeamActivtCation.TextColor = Color.FromRgba("#666666");
@@ -204,6 +216,9 @@ namespace TaskTrackPro
         {
             try
             {
+                BugReportBtn.TextColor = Color.FromRgba("#a3a3a3");
+                BugReportBtn.BackgroundColor = Color.FromRgba("#0000");
+                BugReportCation.TextColor = Color.FromRgba("#666666");
                 TeamActivtRptBtn.TextColor = Color.FromRgba("#a3a3a3");
                 TeamActivtRptBtn.BackgroundColor = Color.FromRgba("#0000");
                 TeamActivtCation.TextColor = Color.FromRgba("#666666");
@@ -233,6 +248,9 @@ namespace TaskTrackPro
         {
             try
             {
+                BugReportBtn.TextColor = Color.FromRgba("#a3a3a3");
+                BugReportBtn.BackgroundColor = Color.FromRgba("#0000");
+                BugReportCation.TextColor = Color.FromRgba("#666666");
                 DasbordBtn.TextColor = Color.FromRgba("#a3a3a3");
                 DasbordBtn.BackgroundColor = Color.FromRgba("#0000");
                 ActivityReportBtn.TextColor = Color.FromRgba("#a3a3a3");
@@ -253,6 +271,39 @@ namespace TaskTrackPro
             try
             {
                 MainContent.Content = new Views.TeamActivityReport();
+                previouslyPressedButton = ProjectBtn;
+            }
+            catch { }
+        }
+
+        private void BugReportBtn_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                TeamActivtRptBtn.TextColor = Color.FromRgba("#a3a3a3");
+                TeamActivtRptBtn.BackgroundColor = Color.FromRgba("#0000");
+                TeamActivtCation.TextColor = Color.FromRgba("#666666");
+                DasbordBtn.TextColor = Color.FromRgba("#a3a3a3");
+                DasbordBtn.TextColor = Color.FromRgba("#a3a3a3");
+                DasbordBtn.BackgroundColor = Color.FromRgba("#0000");
+                ActivityReportBtn.TextColor = Color.FromRgba("#a3a3a3");
+                ActivityReportBtn.BackgroundColor = Color.FromRgba("#0000");
+                ActivityReportCation.TextColor = Color.FromRgba("#666666");
+                AddTaskCation.TextColor = Color.FromRgba("#666666");
+                DashbordCaption.TextColor = Color.FromRgba("#666666");
+                TasksCaption.TextColor = Color.FromRgba("#666666");
+
+                previouslyPressedButton.TextColor = Color.FromRgba("#a3a3a3");
+                previouslyPressedButton.BackgroundColor = Color.FromRgba("#0000");
+            }
+            catch { }
+
+            BugReportBtn.TextColor = Color.FromRgba("#88c2b0");
+            BugReportBtn.BackgroundColor = Color.FromRgba("#daede7");
+            BugReportCation.TextColor = Color.FromRgba("#6aad98");
+            try
+            {
+                MainContent.Content = new Views.BugReports();
                 previouslyPressedButton = ProjectBtn;
             }
             catch { }

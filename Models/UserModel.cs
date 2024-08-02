@@ -26,6 +26,7 @@ namespace TaskTrackPro.Models
         public static string BackIcon = "\ue2ea";
         public static string SelfActivityIcon = "\uf20c";
         public static string TeamActivityIcon = "\ue50a";
+        public static string BugReportIcon = "\ue868";
 
     }
 

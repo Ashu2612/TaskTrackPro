@@ -71,6 +71,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" HeightRequest="20"></Label>
 
@@ -140,6 +141,17 @@
                     </Grid>
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="TeamActivtRpt_Clicked">
+                        </TapGestureRecognizer>
+                    </Border.GestureRecognizers>
+                </Border>
+                
+                <Border Grid.Row="9" Stroke="Transparent">
+                    <Grid>
+                        <Button Text="{x:Static models:Icons.BugReportIcon}" Clicked="BugReportBtn_Clicked" x:Name="BugReportBtn" FontSize="20" TextColor="#a3a3a3" FontFamily="MaterialIcons" BackgroundColor="Transparent" Padding="0,0,120,0" BorderColor="Transparent" MinimumWidthRequest="170" CornerRadius="0" MinimumHeightRequest="40" VerticalOptions="Start"/>
+                        <Label x:Name="BugReportCation" Text="BUG Report" VerticalOptions="Center" TextColor="#666666" HorizontalOptions="Center"/>
+                    </Grid>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BugReportBtn_Clicked">
                         </TapGestureRecognizer>
                     </Border.GestureRecognizers>
                 </Border>
